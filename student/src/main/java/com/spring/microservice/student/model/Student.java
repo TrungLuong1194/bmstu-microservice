@@ -13,7 +13,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private UUID uid = UUID.randomUUID();
+//    private UUID uid = UUID.randomUUID();
 
     private String firstname;
     private String lastname;
@@ -64,6 +64,14 @@ public class Student {
     public void setId(int id) {
         this.id = id;
     }
+
+//    public UUID getUid() {
+//        return uid;
+//    }
+//
+//    public void setUid(UUID uid) {
+//        this.uid = uid;
+//    }
 
     public String getfullname() {
         return this.firstname + " " + this.lastname;

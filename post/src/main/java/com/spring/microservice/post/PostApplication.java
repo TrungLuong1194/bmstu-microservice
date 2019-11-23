@@ -1,4 +1,4 @@
-package com.spring.microservice.student;
+package com.spring.microservice.post;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,11 +11,11 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableEurekaClient
-@ComponentScan("com.spring.microservice.student")
-public class StudentApplication {
+@ComponentScan("com.spring.microservice.post")
+public class PostApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StudentApplication.class, args);
+		SpringApplication.run(PostApplication.class, args);
 	}
 
 	@Configuration

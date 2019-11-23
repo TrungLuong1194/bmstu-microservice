@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class StudentController {
@@ -33,6 +34,18 @@ public class StudentController {
 
         return new ResponseEntity<Student>(student, HttpStatus.OK);
     }
+
+//    @GetMapping("/students/{uid}")
+//    public ResponseEntity<?> getStudentByUid(@PathVariable UUID uid) {
+//
+//        Student student = studentRepository.findStudentByUid(uid);
+//
+//        if (student == null) {
+//            return new ResponseEntity<String>("No student found for UUID " + uid, HttpStatus.NOT_FOUND);
+//        }
+//
+//        return new ResponseEntity<Student>(student, HttpStatus.OK);
+//    }
 
     @PostMapping("/students")
     public ResponseEntity<?> createStudent(@Valid @RequestBody Student studentDetails) {
