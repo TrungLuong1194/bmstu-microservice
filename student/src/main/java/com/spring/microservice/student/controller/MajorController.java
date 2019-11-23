@@ -16,12 +16,21 @@ public class MajorController {
     @Autowired
     private MajorRepository majorRepository;
 
+    /**
+     *
+     * @return List all majors
+     */
     @GetMapping("/majors")
     public List<Major> getMajors() {
 
         return majorRepository.findAll();
     }
 
+    /**
+     * @param id
+     *
+     * @return Get a major with id
+     */
     @GetMapping("/majors/{id}")
     public ResponseEntity<?> getMajor(@PathVariable Long id) {
 
@@ -34,6 +43,11 @@ public class MajorController {
         return new ResponseEntity<Major>(major, HttpStatus.OK);
     }
 
+    /**
+     * @param majorDetails
+     *
+     * @implSpec Create a major with majorDetails
+     */
     @PostMapping("/majors")
     public ResponseEntity<?> createMajor(@Valid @RequestBody Major majorDetails) {
 
@@ -47,6 +61,11 @@ public class MajorController {
         return new ResponseEntity<Major>(majorRepository.save(majorDetails), HttpStatus.OK);
     }
 
+    /**
+     * @param id, majorDetails
+     *
+     * @implSpec Update a major with id
+     */
     @PutMapping("/majors/{id}")
     public ResponseEntity<?> updateMajor(@PathVariable Long id, @Valid @RequestBody Major majorDetails) {
 
@@ -63,6 +82,11 @@ public class MajorController {
         return new ResponseEntity<Major>(updatedMajor, HttpStatus.OK);
     }
 
+    /**
+     * @param id
+     *
+     * @implSpec Delete a major with id
+     */
     @DeleteMapping("/majors/{id}")
     public ResponseEntity<?> deleteMajor(@PathVariable Long id) {
 

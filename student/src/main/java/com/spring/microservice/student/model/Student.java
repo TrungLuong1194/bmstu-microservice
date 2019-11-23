@@ -4,7 +4,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 public class Student {
@@ -12,8 +11,6 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    private UUID uid = UUID.randomUUID();
 
     private String firstname;
     private String lastname;
@@ -64,6 +61,14 @@ public class Student {
     public void setId(int id) {
         this.id = id;
     }
+
+//    public UUID getUid() {
+//        return uid;
+//    }
+//
+//    public void setUid(UUID uid) {
+//        this.uid = uid;
+//    }
 
     public String getfullname() {
         return this.firstname + " " + this.lastname;

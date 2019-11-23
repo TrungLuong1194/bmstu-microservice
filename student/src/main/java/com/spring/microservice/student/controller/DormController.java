@@ -16,12 +16,21 @@ public class DormController {
     @Autowired
     private DormRepository dormRepository;
 
+    /**
+     *
+     * @return List all dorms
+     */
     @GetMapping("/dorms")
     public List<Dormitory> getDorms() {
 
         return dormRepository.findAll();
     }
 
+    /**
+     * @param id
+     *
+     * @return Get a dorm with id
+     */
     @GetMapping("/dorms/{id}")
     public ResponseEntity<?> getDorm(@PathVariable Long id) {
 
@@ -34,6 +43,11 @@ public class DormController {
         return new ResponseEntity<Dormitory>(dorm, HttpStatus.OK);
     }
 
+    /**
+     * @param dormDetails
+     *
+     * @implSpec Create a dorm with dormDetails
+     */
     @PostMapping("/dorms")
     public ResponseEntity<?> createDorm(@Valid @RequestBody Dormitory dormDetails) {
 
@@ -47,6 +61,11 @@ public class DormController {
         return new ResponseEntity<Dormitory>(dormRepository.save(dormDetails), HttpStatus.OK);
     }
 
+    /**
+     * @param id, dormDetails
+     *
+     * @implSpec Update a dorm with id
+     */
     @PutMapping("/dorms/{id}")
     public ResponseEntity<?> updateDorm(@PathVariable Long id, @Valid @RequestBody Dormitory dormDetails) {
 
@@ -63,6 +82,11 @@ public class DormController {
         return new ResponseEntity<Dormitory>(updatedDorm, HttpStatus.OK);
     }
 
+    /**
+     * @param id
+     *
+     * @implSpec Delete a dorm with id
+     */
     @DeleteMapping("/dorms/{id}")
     public ResponseEntity<?> deleteDorm(@PathVariable Long id) {
 

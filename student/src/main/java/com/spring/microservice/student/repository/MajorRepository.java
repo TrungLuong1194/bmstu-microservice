@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MajorRepository extends JpaRepository<Major, Long> {
+
     Major findMajorById(long id);
+
     Major findMajorByName(String name);
 }

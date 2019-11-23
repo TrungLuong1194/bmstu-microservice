@@ -16,12 +16,21 @@ public class CityController {
     @Autowired
     private CityRepository cityRepository;
 
+    /**
+     *
+     * @return List all cities
+     */
     @GetMapping("/cities")
     public List<City> getCities() {
 
         return cityRepository.findAll();
     }
 
+    /**
+     * @param id
+     *
+     * @return Get a city with id
+     */
     @GetMapping("/cities/{id}")
     public ResponseEntity<?> getCity(@PathVariable Long id) {
 
@@ -34,6 +43,11 @@ public class CityController {
         return new ResponseEntity<City>(city, HttpStatus.OK);
     }
 
+    /**
+     * @param cityDetails
+     *
+     * @implSpec Create a city with cityDetails
+     */
     @PostMapping("/cities")
     public ResponseEntity<?> createCity(@Valid @RequestBody City cityDetails) {
 
@@ -47,6 +61,11 @@ public class CityController {
         return new ResponseEntity<City>(cityRepository.save(cityDetails), HttpStatus.OK);
     }
 
+    /**
+     * @param id, cityDetails
+     *
+     * @implSpec Update a city with id
+     */
     @PutMapping("/cities/{id}")
     public ResponseEntity<?> updateCity(@PathVariable Long id, @Valid @RequestBody City cityDetails) {
 
@@ -63,6 +82,11 @@ public class CityController {
         return new ResponseEntity<City>(updatedCity, HttpStatus.OK);
     }
 
+    /**
+     * @param id
+     *
+     * @implSpec Delete a city with id
+     */
     @DeleteMapping("/cities/{id}")
     public ResponseEntity<?> deleteCity(@PathVariable Long id) {
 
