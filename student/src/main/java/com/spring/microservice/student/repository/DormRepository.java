@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DormRepository extends JpaRepository<Dormitory, Long> {
+
     Dormitory findDormitoryById(long id);
+
     Dormitory findDormitoryByName(String name);
 }

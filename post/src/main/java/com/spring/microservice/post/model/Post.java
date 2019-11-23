@@ -4,7 +4,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 public class Post {
@@ -13,7 +12,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long student_id;
+    private long student;
 
     private String title;
     private String content;
@@ -24,8 +23,8 @@ public class Post {
     public Post() {
     }
 
-    public Post(long student_uid, String title, String content, Date date_create) {
-        this.student_id = student_uid;
+    public Post(long student, String title, String content, Date date_create) {
+        this.student = student;
         this.title = title;
         this.content = content;
         this.date_create = date_create;
@@ -39,12 +38,12 @@ public class Post {
         this.id = id;
     }
 
-    public long getStudent_id() {
-        return student_id;
+    public long getStudent() {
+        return student;
     }
 
-    public void setStudent_id(long student_id) {
-        this.student_id = student_id;
+    public void setStudent(long student) {
+        this.student = student;
     }
 
     public String getTitle() {
@@ -75,7 +74,7 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "id=" + id +
-                ", student_uid='" + student_id + '\'' +
+                ", student='" + student + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", date_create=" + date_create +

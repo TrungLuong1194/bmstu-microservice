@@ -21,12 +21,21 @@ public class PostController {
     @Autowired
     private RestTemplate restTemplate;
 
+    /**
+     *
+     * @return List all posts
+     */
     @GetMapping("/posts")
     public List<Post> getPosts() {
 
         return postRepository.findAll();
     }
 
+    /**
+     * @param id
+     *
+     * @return Get a post with id
+     */
     @GetMapping("/posts/{id}")
     public ResponseEntity<?> getPost(@PathVariable Long id) {
 
@@ -39,15 +48,42 @@ public class PostController {
         return new ResponseEntity<Post>(post, HttpStatus.OK);
     }
 
-    @PostMapping("students/{id}/posts")
-    public ResponseEntity<?> createPost(@PathVariable Long id, @Valid @RequestBody Post postDetails) {
+    /**
+     * @param student
+     *
+     * @return List all posts with student
+     */
+    @GetMapping("students/{student}/posts")
+    public ResponseEntity<?> getPostByStudent(@PathVariable Long student) {
 
         String url = "http://student-service/students/{id}";
 
         try {
-            restTemplate.getForObject(url, String.class, id);
+            restTemplate.getForObject(url, String.class, student);
         } catch (HttpStatusCodeException e) {
-            return new ResponseEntity<String>("No student found for id " + id,
+            return new ResponseEntity<String>("No student found for id " + student,
+                    HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        List<Post> post = postRepository.findAllByStudent(student);
+
+        return new ResponseEntity<List<Post>>(post, HttpStatus.OK);
+    }
+
+    /**
+     * @param postDetails
+     *
+     * @implSpec Create a post with postDetails
+     */
+    @PostMapping("/posts")
+    public ResponseEntity<?> createPost(@Valid @RequestBody Post postDetails) {
+
+        String url = "http://student-service/students/{id}";
+
+        try {
+            restTemplate.getForObject(url, String.class, postDetails.getStudent());
+        } catch (HttpStatusCodeException e) {
+            return new ResponseEntity<String>("No student found for id " + postDetails.getStudent(),
                     HttpStatus.NOT_ACCEPTABLE);
         }
 
@@ -67,22 +103,33 @@ public class PostController {
         return new ResponseEntity<Post>(postRepository.save(postDetails), HttpStatus.OK);
     }
 
-//    @PutMapping("/posts/{id}")
-//    public ResponseEntity<?> updatePost(@PathVariable Long id, @Valid @RequestBody Post cityDetails) {
-//
-//        Post post = postRepository.findCityById(id);
-//
-//        if (post == null) {
-//            return new ResponseEntity<String>("No post found for ID " + id, HttpStatus.NOT_FOUND);
-//        }
-//
-//        post.setName(cityDetails.getName());
-//
-//        City updatedCity = postRepository.save(post);
-//
-//        return new ResponseEntity<Post>(updatedCity, HttpStatus.OK);
-//    }
+    /**
+     * @param id, postDetails
+     *
+     * @implSpec Update a post with id
+     */
+    @PutMapping("/posts/{id}")
+    public ResponseEntity<?> updatePost(@PathVariable Long id, @Valid @RequestBody Post postDetails) {
 
+        Post post = postRepository.findPostById(id);
+
+        if (post == null) {
+            return new ResponseEntity<String>("No post found for ID " + id, HttpStatus.NOT_FOUND);
+        }
+
+        post.setTitle(postDetails.getTitle());
+        post.setContent(postDetails.getContent());
+
+        Post updatedPost = postRepository.save(post);
+
+        return new ResponseEntity<Post>(updatedPost, HttpStatus.OK);
+    }
+
+    /**
+     * @param id
+     *
+     * @implSpec Delete a post with id
+     */
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<?> deletePost(@PathVariable Long id) {
 

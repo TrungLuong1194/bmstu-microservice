@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 public class StudentController {
@@ -17,12 +16,21 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
+    /**
+     *
+     * @return List all students
+     */
     @GetMapping("/students")
     public List<Student> getStudents() {
 
         return studentRepository.findAll();
     }
 
+    /**
+     * @param id
+     *
+     * @return Get a student with id
+     */
     @GetMapping("/students/{id}")
     public ResponseEntity<?> getStudent(@PathVariable Long id) {
 
@@ -35,18 +43,11 @@ public class StudentController {
         return new ResponseEntity<Student>(student, HttpStatus.OK);
     }
 
-//    @GetMapping("/students/{uid}")
-//    public ResponseEntity<?> getStudentByUid(@PathVariable UUID uid) {
-//
-//        Student student = studentRepository.findStudentByUid(uid);
-//
-//        if (student == null) {
-//            return new ResponseEntity<String>("No student found for UUID " + uid, HttpStatus.NOT_FOUND);
-//        }
-//
-//        return new ResponseEntity<Student>(student, HttpStatus.OK);
-//    }
-
+    /**
+     * @param studentDetails
+     *
+     * @implSpec Create a student with studentDetails
+     */
     @PostMapping("/students")
     public ResponseEntity<?> createStudent(@Valid @RequestBody Student studentDetails) {
 
@@ -66,6 +67,11 @@ public class StudentController {
         return new ResponseEntity<Student>(studentRepository.save(studentDetails), HttpStatus.OK);
     }
 
+    /**
+     * @param id, studentDetails
+     *
+     * @implSpec Update a student with id
+     */
     @PutMapping("/students/{id}")
     public ResponseEntity<?> updateStudent(@PathVariable Long id, @Valid @RequestBody Student studentDetails) {
 
@@ -92,6 +98,11 @@ public class StudentController {
         return new ResponseEntity<Student>(updatedStudent, HttpStatus.OK);
     }
 
+    /**
+     * @param id
+     *
+     * @implSpec Delete a student with id
+     */
     @DeleteMapping("/students/{id}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
 
