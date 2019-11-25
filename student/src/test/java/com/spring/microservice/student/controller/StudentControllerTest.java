@@ -5,6 +5,9 @@ import com.spring.microservice.student.model.City;
 import com.spring.microservice.student.model.Dormitory;
 import com.spring.microservice.student.model.Major;
 import com.spring.microservice.student.model.Student;
+import com.spring.microservice.student.repository.CityRepository;
+import com.spring.microservice.student.repository.DormRepository;
+import com.spring.microservice.student.repository.MajorRepository;
 import com.spring.microservice.student.repository.StudentRepository;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -12,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
@@ -31,14 +35,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(StudentController.class)
 class StudentControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private CityRepository cityRepository;
+
+    @MockBean
+    private DormRepository dormRepository;
+
+    @MockBean
+    private MajorRepository majorRepository;
 
     @MockBean
     private StudentRepository studentRepository;
@@ -87,7 +99,7 @@ class StudentControllerTest {
         Date date1 = new Date();
 
         Student student = new Student(1, "Trung", "Luong", date1, "11M",
-                        "Address 1", "012345", "desc1", "email1", major, dorm, city);
+                "Address 1", "012345", "desc1", "email1", major, dorm, city);
 
         when(studentRepository.findStudentById(1)).thenReturn(student);
 

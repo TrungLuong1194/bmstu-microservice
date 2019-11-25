@@ -1,36 +1,39 @@
 package com.spring.microservice.student.controller;
 
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.microservice.student.model.City;
 import com.spring.microservice.student.repository.CityRepository;
+import com.spring.microservice.student.repository.DormRepository;
+import com.spring.microservice.student.repository.MajorRepository;
+import com.spring.microservice.student.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(CityController.class)
 class CityControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
@@ -40,6 +43,15 @@ class CityControllerTest {
 
     @MockBean
     private CityRepository cityRepository;
+
+    @MockBean
+    private DormRepository dormRepository;
+
+    @MockBean
+    private MajorRepository majorRepository;
+
+    @MockBean
+    private StudentRepository studentReposirity;
 
     @Test
     void getCities() throws Exception {
