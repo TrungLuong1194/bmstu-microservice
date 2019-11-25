@@ -30,9 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CityControllerTest {
-
-    public CityControllerTest() {}
+class CityControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -42,7 +40,7 @@ public class CityControllerTest {
     @MockBean
     private CityRepository cityRepository;
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getCities() throws Exception {
 
         List<City> cities = Arrays.asList(
@@ -64,7 +62,7 @@ public class CityControllerTest {
         verify(cityRepository, times(1)).findAll();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getCity() throws Exception {
 
         City city = new City(1,"Hanoi");
@@ -80,7 +78,7 @@ public class CityControllerTest {
         verify(cityRepository, times(1)).findCityById(1);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void createCity() throws Exception {
         City city = new City(1,"Hanoi");
 
@@ -97,7 +95,7 @@ public class CityControllerTest {
         verify(cityRepository, times(1)).save(ArgumentMatchers.any(City.class));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void updateCity() throws Exception {
         City city = new City(1,"Hanoi");
 

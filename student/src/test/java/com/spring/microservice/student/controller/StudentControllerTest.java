@@ -7,7 +7,7 @@ import com.spring.microservice.student.model.Major;
 import com.spring.microservice.student.model.Student;
 import com.spring.microservice.student.repository.StudentRepository;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,12 +30,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class StudentControllerTest {
-
-    public StudentControllerTest() {}
+class StudentControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -46,8 +43,8 @@ public class StudentControllerTest {
     @MockBean
     private StudentRepository studentRepository;
 
-    @org.junit.Test
-    public void getStudents() throws Exception {
+    @Test
+    void getStudents() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -81,8 +78,8 @@ public class StudentControllerTest {
         verify(studentRepository, times(1)).findAll();
     }
 
-    @org.junit.Test
-    public void getStudent() throws Exception {
+    @Test
+    void getStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -109,8 +106,8 @@ public class StudentControllerTest {
         verify(studentRepository, times(1)).findStudentById(1);
     }
 
-    @org.junit.Test
-    public void createStudent() throws Exception {
+    @Test
+    void createStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -139,8 +136,8 @@ public class StudentControllerTest {
         verify(studentRepository, times(1)).save(ArgumentMatchers.any(Student.class));
     }
 
-    @org.junit.Test
-    public void updateStudent() throws Exception {
+    @Test
+    void updateStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -171,7 +168,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void deleteStudent() throws Exception {
+    void deleteStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
