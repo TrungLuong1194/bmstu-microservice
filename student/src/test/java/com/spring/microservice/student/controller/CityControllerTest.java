@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CityControllerTest {
+class CityControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -42,7 +42,7 @@ public class CityControllerTest {
     private CityRepository cityRepository;
 
     @Test
-    public void getCities() throws Exception {
+    void getCities() throws Exception {
 
         List<City> cities = Arrays.asList(
                 new City(1,"Hanoi"),
@@ -64,7 +64,7 @@ public class CityControllerTest {
     }
 
     @Test
-    public void getCity() throws Exception {
+    void getCity() throws Exception {
 
         City city = new City(1,"Hanoi");
 
@@ -80,7 +80,7 @@ public class CityControllerTest {
     }
 
     @Test
-    public void createCity() throws Exception {
+    void createCity() throws Exception {
         City city = new City(1,"Hanoi");
 
         when(cityRepository.save(ArgumentMatchers.any(City.class))).thenReturn(city);
@@ -97,7 +97,7 @@ public class CityControllerTest {
     }
 
     @Test
-    public void updateCity() throws Exception {
+    void updateCity() throws Exception {
         City city = new City(1,"Hanoi");
 
         when(cityRepository.findCityById(1)).thenReturn(city);
@@ -115,7 +115,7 @@ public class CityControllerTest {
     }
 
     @Test
-    public void deleteCity() throws Exception {
+    void deleteCity() throws Exception {
 
         City city = new City(1,"Hanoi");
 

@@ -8,4 +8,4 @@ env:
   - TEST_DIR=post
 
 script:
-  - cd $TEST_DIR && mvn test
+  - cd $TEST_DIR && mvn install && mvn test

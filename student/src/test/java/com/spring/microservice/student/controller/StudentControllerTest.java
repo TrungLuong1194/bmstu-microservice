@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class StudentControllerTest {
+class StudentControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -44,7 +44,7 @@ public class StudentControllerTest {
     private StudentRepository studentRepository;
 
     @Test
-    public void getStudents() throws Exception {
+    void getStudents() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -79,7 +79,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void getStudent() throws Exception {
+    void getStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -107,7 +107,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void createStudent() throws Exception {
+    void createStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -137,7 +137,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void updateStudent() throws Exception {
+    void updateStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -168,7 +168,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void deleteStudent() throws Exception {
+    void deleteStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");

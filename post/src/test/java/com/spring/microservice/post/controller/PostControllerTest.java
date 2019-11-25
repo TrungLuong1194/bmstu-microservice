@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PostControllerTest {
+class PostControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -47,7 +47,7 @@ public class PostControllerTest {
     private PostRepository postRepository;
 
     @Test
-    public void getPosts() throws Exception {
+    void getPosts() throws Exception {
 
         Date date1 = new Date();
         Date date2 = new Date();
@@ -77,7 +77,7 @@ public class PostControllerTest {
     }
 
     @Test
-    public void getPost() throws Exception {
+    void getPost() throws Exception {
         Date date1 = new Date();
 
         Post post = new Post(1,1, "title1", "content1", date1);
@@ -104,7 +104,7 @@ public class PostControllerTest {
     }
 
     @Test
-    public void updatePost() throws Exception {
+    void updatePost() throws Exception {
 
         Date date1 = new Date();
 
@@ -127,7 +127,7 @@ public class PostControllerTest {
     }
 
     @Test
-    public void deletePost() throws Exception {
+    void deletePost() throws Exception {
 
         Date date1 = new Date();
 
