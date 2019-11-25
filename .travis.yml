@@ -3,6 +3,9 @@ language:
 jdk:
   - oraclejdk11
 
-before_install:
-  - cd student
-  - cd post
+env:
+  - TEST_DIR=student
+  - TEST_DIR=post
+
+script:
+  - cd $TEST_DIR
