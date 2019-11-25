@@ -96,14 +96,6 @@ class PostControllerTest {
     }
 
     @Test
-    void getPostByStudent() {
-    }
-
-    @Test
-    void createPost() {
-    }
-
-    @Test
     void updatePost() throws Exception {
 
         Date date1 = new Date();
