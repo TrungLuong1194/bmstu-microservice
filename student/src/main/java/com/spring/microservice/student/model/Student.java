@@ -54,6 +54,22 @@ public class Student {
         this.city = city;
     }
 
+    public Student(long id, String firstname, String lastname, Date birthday, String classname, String address,
+                   String phone, String description, String email, Major major, Dormitory dorm, City city) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthday = birthday;
+        this.classname = classname;
+        this.address = address;
+        this.phone = phone;
+        this.description = description;
+        this.email = email;
+        this.major = major;
+        this.dorm = dorm;
+        this.city = city;
+    }
+
     public long getId() {
         return id;
     }
