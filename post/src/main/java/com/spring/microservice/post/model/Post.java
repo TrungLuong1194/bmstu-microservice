@@ -30,6 +30,14 @@ public class Post {
         this.date_create = date_create;
     }
 
+    public Post(long id, long student, String title, String content, Date date_create) {
+        this.id = id;
+        this.student = student;
+        this.title = title;
+        this.content = content;
+        this.date_create = date_create;
+    }
+
     public long getId() {
         return id;
     }
