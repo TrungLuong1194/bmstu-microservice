@@ -7,5 +7,5 @@ env:
   - TEST_DIR=student
   - TEST_DIR=post
 
-before_install:
-  - cd $TEST_DIR
+script:
+  - cd $TEST_DIR && mvn test
