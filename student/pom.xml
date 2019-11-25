@@ -104,6 +104,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/io.takari/maven-wrapper -->
+		<dependency>
+			<groupId>io.takari</groupId>
+			<artifactId>maven-wrapper</artifactId>
+			<version>0.5.5</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
