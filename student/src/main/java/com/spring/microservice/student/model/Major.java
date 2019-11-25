@@ -18,6 +18,11 @@ public class Major {
         this.name = name;
     }
 
+    public Major(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
