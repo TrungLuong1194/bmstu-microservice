@@ -7,7 +7,7 @@ import com.spring.microservice.student.model.Major;
 import com.spring.microservice.student.model.Student;
 import com.spring.microservice.student.repository.StudentRepository;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class StudentControllerTest {
+public class StudentControllerTest {
+
+    public StudentControllerTest() {}
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -44,8 +46,8 @@ class StudentControllerTest {
     @MockBean
     private StudentRepository studentRepository;
 
-    @Test
-    void getStudents() throws Exception {
+    @org.junit.Test
+    public void getStudents() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -79,8 +81,8 @@ class StudentControllerTest {
         verify(studentRepository, times(1)).findAll();
     }
 
-    @Test
-    void getStudent() throws Exception {
+    @org.junit.Test
+    public void getStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -107,8 +109,8 @@ class StudentControllerTest {
         verify(studentRepository, times(1)).findStudentById(1);
     }
 
-    @Test
-    void createStudent() throws Exception {
+    @org.junit.Test
+    public void createStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -137,8 +139,8 @@ class StudentControllerTest {
         verify(studentRepository, times(1)).save(ArgumentMatchers.any(Student.class));
     }
 
-    @Test
-    void updateStudent() throws Exception {
+    @org.junit.Test
+    public void updateStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -169,7 +171,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void deleteStudent() throws Exception {
+    public void deleteStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
