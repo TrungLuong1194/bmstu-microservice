@@ -44,7 +44,7 @@ class StudentControllerTest {
     private StudentRepository studentRepository;
 
     @Test
-    void getStudents() throws Exception {
+    public void getStudents() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -79,7 +79,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void getStudent() throws Exception {
+    public void getStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -107,7 +107,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void createStudent() throws Exception {
+    public void createStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -137,7 +137,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void updateStudent() throws Exception {
+    public void updateStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");
@@ -168,7 +168,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void deleteStudent() throws Exception {
+    public void deleteStudent() throws Exception {
 
         City city = new City(1, "Hanoi");
         Major major = new Major(1, "IU6");

@@ -42,7 +42,7 @@ class CityControllerTest {
     private CityRepository cityRepository;
 
     @Test
-    void getCities() throws Exception {
+    public void getCities() throws Exception {
 
         List<City> cities = Arrays.asList(
                 new City(1,"Hanoi"),
@@ -64,7 +64,7 @@ class CityControllerTest {
     }
 
     @Test
-    void getCity() throws Exception {
+    public void getCity() throws Exception {
 
         City city = new City(1,"Hanoi");
 
@@ -80,7 +80,7 @@ class CityControllerTest {
     }
 
     @Test
-    void createCity() throws Exception {
+    public void createCity() throws Exception {
         City city = new City(1,"Hanoi");
 
         when(cityRepository.save(ArgumentMatchers.any(City.class))).thenReturn(city);
@@ -97,7 +97,7 @@ class CityControllerTest {
     }
 
     @Test
-    void updateCity() throws Exception {
+    public void updateCity() throws Exception {
         City city = new City(1,"Hanoi");
 
         when(cityRepository.findCityById(1)).thenReturn(city);
@@ -115,7 +115,7 @@ class CityControllerTest {
     }
 
     @Test
-    void deleteCity() throws Exception {
+    public void deleteCity() throws Exception {
 
         City city = new City(1,"Hanoi");
 

@@ -3,9 +3,9 @@ language:
 jdk:
   - oraclejdk11
 
-before_install:
-  - cd student
-  - mvn test
-  - cd ..
-  - cd post
-  - mvn test
+env:
+  - TEST_DIR=student
+  - TEST_DIR=post
+
+script:
+  - cd $TEST_DIR && mvn test

@@ -47,7 +47,7 @@ class PostControllerTest {
     private PostRepository postRepository;
 
     @Test
-    void getPosts() throws Exception {
+    public void getPosts() throws Exception {
 
         Date date1 = new Date();
         Date date2 = new Date();
@@ -77,7 +77,7 @@ class PostControllerTest {
     }
 
     @Test
-    void getPost() throws Exception {
+    public void getPost() throws Exception {
         Date date1 = new Date();
 
         Post post = new Post(1,1, "title1", "content1", date1);
@@ -104,7 +104,7 @@ class PostControllerTest {
     }
 
     @Test
-    void updatePost() throws Exception {
+    public void updatePost() throws Exception {
 
         Date date1 = new Date();
 
@@ -127,7 +127,7 @@ class PostControllerTest {
     }
 
     @Test
-    void deletePost() throws Exception {
+    public void deletePost() throws Exception {
 
         Date date1 = new Date();
 
