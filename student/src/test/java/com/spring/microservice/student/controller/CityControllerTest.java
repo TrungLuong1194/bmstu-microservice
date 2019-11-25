@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class CityControllerTest {
+public class CityControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 

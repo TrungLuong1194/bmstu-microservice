@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class PostControllerTest {
+public class PostControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
