@@ -10,6 +10,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -100,6 +101,8 @@ public class PostController {
                     HttpStatus.NOT_ACCEPTABLE);
         }
 
+        postDetails.setDate_create(new Date());
+
         return new ResponseEntity<Post>(postRepository.save(postDetails), HttpStatus.OK);
     }
 
@@ -117,8 +120,10 @@ public class PostController {
             return new ResponseEntity<String>("No post found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
+        postDetails.setDate_create(new Date());
         post.setTitle(postDetails.getTitle());
         post.setContent(postDetails.getContent());
+        post.setDate_create(postDetails.getDate_create());
 
         Post updatedPost = postRepository.save(post);
 
