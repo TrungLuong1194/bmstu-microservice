@@ -6,6 +6,7 @@ jdk:
 env:
   - TEST_DIR=student
   - TEST_DIR=post
+  - TEST_DIR=comment
 
 before_install:
   - cd $TEST_DIR
