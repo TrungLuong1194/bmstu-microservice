@@ -118,17 +118,17 @@ class PostControllerTest {
         verify(postRepository, times(1)).save(ArgumentMatchers.any(Post.class));
     }
 
-    @Test
-    void deletePost() throws Exception {
-
-        Date date1 = new Date();
-
-        Post post = new Post(1,1, "title1", "content1", date1);
-
-        when(postRepository.findPostById(1)).thenReturn(post);
-        doNothing().when(postRepository).delete(post);
-
-        mockMvc.perform(delete("/posts/1"))
-                .andExpect(status().isOk());
-    }
+//    @Test
+//    void deletePost() throws Exception {
+//
+//        Date date1 = new Date();
+//
+//        Post post = new Post(1,1, "title1", "content1", date1);
+//
+//        when(postRepository.findPostById(1)).thenReturn(post);
+//        doNothing().when(postRepository).delete(post);
+//
+//        mockMvc.perform(delete("/posts/1"))
+//                .andExpect(status().isOk());
+//    }
 }

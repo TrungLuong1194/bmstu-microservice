@@ -179,21 +179,21 @@ class StudentControllerTest {
         verify(studentRepository, times(1)).save(ArgumentMatchers.any(Student.class));
     }
 
-    @Test
-    void deleteStudent() throws Exception {
-
-        City city = new City(1, "Hanoi");
-        Major major = new Major(1, "IU6");
-        Dormitory dorm = new Dormitory(1, "Dorm 9");
-        Date date1 = new Date();
-
-        Student student = new Student(1, "Trung", "Luong", date1, "11M",
-                "Address 1", "012345", "desc1", "email1", major, dorm, city);
-
-        when(studentRepository.findStudentById(1)).thenReturn(student);
-        doNothing().when(studentRepository).delete(student);
-
-        mockMvc.perform(delete("/students/1"))
-                .andExpect(status().isOk());
-    }
+//    @Test
+//    void deleteStudent() throws Exception {
+//
+//        City city = new City(1, "Hanoi");
+//        Major major = new Major(1, "IU6");
+//        Dormitory dorm = new Dormitory(1, "Dorm 9");
+//        Date date1 = new Date();
+//
+//        Student student = new Student(1, "Trung", "Luong", date1, "11M",
+//                "Address 1", "012345", "desc1", "email1", major, dorm, city);
+//
+//        when(studentRepository.findStudentById(1)).thenReturn(student);
+//        doNothing().when(studentRepository).delete(student);
+//
+//        mockMvc.perform(delete("/students/1"))
+//                .andExpect(status().isOk());
+//    }
 }
