@@ -48,6 +48,48 @@ public class StudentController {
     }
 
     /**
+     * @param id
+     *
+     * @return Get a student with all comments
+     */
+    @GetMapping("/students/{id}/comments")
+    public ResponseEntity<?> getStudentWithComment(@PathVariable Long id) {
+
+        Student student = studentRepository.findStudentById(id);
+
+        if (student == null) {
+            return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
+        }
+
+        String urlComment = "http://comment-service/comments/students/{student}";
+
+        String str = restTemplate.getForObject(urlComment, String.class, id);
+
+        return new ResponseEntity<String>(str, HttpStatus.OK);
+    }
+
+    /**
+     * @param id
+     *
+     * @return Get a student with all posts
+     */
+    @GetMapping("/students/{id}/posts")
+    public ResponseEntity<?> getStudentWithPost(@PathVariable Long id) {
+
+        Student student = studentRepository.findStudentById(id);
+
+        if (student == null) {
+            return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
+        }
+
+        String urlPost = "http://post-service/posts/students/{student}";
+
+        String str = restTemplate.getForObject(urlPost, String.class, id);
+
+        return new ResponseEntity<String>(str, HttpStatus.OK);
+    }
+
+    /**
      * @param studentDetails
      *
      * @implSpec Create a student with studentDetails

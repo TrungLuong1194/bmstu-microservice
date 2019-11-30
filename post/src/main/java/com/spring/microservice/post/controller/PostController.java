@@ -51,6 +51,27 @@ public class PostController {
     }
 
     /**
+     * @param id
+     *
+     * @return Get a post with all comments
+     */
+    @GetMapping("/posts/{id}/comments")
+    public ResponseEntity<?> getPostWithComment(@PathVariable Long id) {
+
+        Post post = postRepository.findPostById(id);
+
+        if (post == null) {
+            return new ResponseEntity<String>("No post found for ID " + id, HttpStatus.NOT_FOUND);
+        }
+
+        String urlComment = "http://comment-service/comments/posts/{post}";
+
+        String str = restTemplate.getForObject(urlComment, String.class, id);
+
+        return new ResponseEntity<String>(str, HttpStatus.OK);
+    }
+
+    /**
      * @param student
      *
      * @return List all posts with student
