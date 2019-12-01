@@ -86,7 +86,7 @@ public class Student {
 //        this.uid = uid;
 //    }
 
-    public String getfullname() {
+    public String getFullname() {
         return this.firstname + " " + this.lastname;
     }
 

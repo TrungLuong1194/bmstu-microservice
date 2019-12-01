@@ -18,10 +18,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -118,17 +122,35 @@ class PostControllerTest {
         verify(postRepository, times(1)).save(ArgumentMatchers.any(Post.class));
     }
 
-    @Test
-    void deletePost() throws Exception {
+//    @Test
+//    void deletePost() throws Exception {
+//
+//        Date date1 = new Date();
+//
+//        Post post = new Post(1,1, "title1", "content1", date1);
+//
+//        when(postRepository.findPostById(1)).thenReturn(post);
+//        doNothing().when(postRepository).delete(post);
+//
+//        mockMvc.perform(delete("/posts/1"))
+//                .andExpect(status().isOk());
+//    }
 
-        Date date1 = new Date();
 
-        Post post = new Post(1,1, "title1", "content1", date1);
 
-        when(postRepository.findPostById(1)).thenReturn(post);
-        doNothing().when(postRepository).delete(post);
+//    @Autowired
+//    private RestTemplate restTemplate;
+//
+//    @Test
+//    void getPostWithComment() throws Exception {
+//        String urlPost = "http://localhost:8300/posts/{id}";
+//        Post post = restTemplate.getForObject(urlPost, Post.class, 13);
+//
+//        String urlComment = "http://localhost:8400/comments/posts/{post}";
+//
+//        ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlComment, String.class, post.getId());
+//        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+//    }
 
-        mockMvc.perform(delete("/posts/1"))
-                .andExpect(status().isOk());
-    }
+
 }

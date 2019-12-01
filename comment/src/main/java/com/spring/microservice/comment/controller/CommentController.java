@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -54,7 +55,7 @@ public class CommentController {
      *
      * @return List all comments with student
      */
-    @GetMapping("students/{student}/comments")
+    @GetMapping("/comments/students/{student}")
     public ResponseEntity<?> getCommentByStudent(@PathVariable Long student) {
 
         String url = "http://student-service/students/{id}";
@@ -76,7 +77,7 @@ public class CommentController {
      *
      * @return List all comments with post
      */
-    @GetMapping("posts/{post}/comments")
+    @GetMapping("/comments/posts/{post}")
     public ResponseEntity<?> getCommentByPost(@PathVariable Long post) {
 
         String url = "http://post-service/posts/{id}";
@@ -163,6 +164,52 @@ public class CommentController {
 
         commentRepository.delete(comment);
 
-        return new ResponseEntity<Long>(id, HttpStatus.OK);
+        return new ResponseEntity<String>("Delete successful!", HttpStatus.OK);
+    }
+
+    /**
+     * @param post
+     *
+     * @implSpec Delete a comment with post
+     */
+    @Transactional
+    @DeleteMapping("/comments/posts/{post}")
+    public ResponseEntity<?> deleteCommentByPost(@PathVariable Long post) {
+
+        String url = "http://post-service/posts/{id}";
+
+        try {
+            restTemplate.getForObject(url, String.class, post);
+        } catch (HttpStatusCodeException e) {
+            return new ResponseEntity<String>("No post found for id " + post,
+                    HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        commentRepository.deleteAllByPost(post);
+
+        return new ResponseEntity<String>("Delete successful!", HttpStatus.OK);
+    }
+
+    /**
+     * @param student
+     *
+     * @implSpec Delete a comment with student
+     */
+    @Transactional
+    @DeleteMapping("/comments/students/{student}")
+    public ResponseEntity<?> deleteCommentByStudent(@PathVariable Long student) {
+
+        String url = "http://student-service/students/{id}";
+
+        try {
+            restTemplate.getForObject(url, String.class, student);
+        } catch (HttpStatusCodeException e) {
+            return new ResponseEntity<String>("No student found for id " + student,
+                    HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        commentRepository.deleteAllByStudent(student);
+
+        return new ResponseEntity<String>("Delete successful!", HttpStatus.OK);
     }
 }

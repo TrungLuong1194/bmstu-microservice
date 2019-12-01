@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -15,6 +16,9 @@ public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     /**
      *
@@ -41,6 +45,48 @@ public class StudentController {
         }
 
         return new ResponseEntity<Student>(student, HttpStatus.OK);
+    }
+
+    /**
+     * @param id
+     *
+     * @return Get a student with all comments
+     */
+    @GetMapping("/students/{id}/comments")
+    public ResponseEntity<?> getStudentWithComment(@PathVariable Long id) {
+
+        Student student = studentRepository.findStudentById(id);
+
+        if (student == null) {
+            return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
+        }
+
+        String urlComment = "http://comment-service/comments/students/{student}";
+
+        String str = restTemplate.getForObject(urlComment, String.class, id);
+
+        return new ResponseEntity<String>(str, HttpStatus.OK);
+    }
+
+    /**
+     * @param id
+     *
+     * @return Get a student with all posts
+     */
+    @GetMapping("/students/{id}/posts")
+    public ResponseEntity<?> getStudentWithPost(@PathVariable Long id) {
+
+        Student student = studentRepository.findStudentById(id);
+
+        if (student == null) {
+            return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
+        }
+
+        String urlPost = "http://post-service/posts/students/{student}";
+
+        String str = restTemplate.getForObject(urlPost, String.class, id);
+
+        return new ResponseEntity<String>(str, HttpStatus.OK);
     }
 
     /**
@@ -112,8 +158,12 @@ public class StudentController {
             return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
+        String urlPost = "http://post-service/posts/students/{student}";
+
+        restTemplate.delete(urlPost, id);
+
         studentRepository.delete(student);
 
-        return new ResponseEntity<Long>(id, HttpStatus.OK);
+        return new ResponseEntity<String>("Delete successful!", HttpStatus.OK);
     }
 }
