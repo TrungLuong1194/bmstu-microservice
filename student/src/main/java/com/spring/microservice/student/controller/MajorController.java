@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = { "http://localhost:63342", "http://localhost:63343" })
 @RestController
 public class MajorController {
 

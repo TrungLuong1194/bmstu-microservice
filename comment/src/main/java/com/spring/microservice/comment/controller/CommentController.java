@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin(origins = { "http://localhost:63342", "http://localhost:63343" })
 @RestController
 public class CommentController {
 
@@ -140,6 +141,8 @@ public class CommentController {
         }
 
         commentDetails.setDate_create(new Date());
+        comment.setStudent(commentDetails.getStudent());
+        comment.setPost(commentDetails.getPost());
         comment.setContent(commentDetails.getContent());
         comment.setDate_create(commentDetails.getDate_create());
 
@@ -164,7 +167,7 @@ public class CommentController {
 
         commentRepository.delete(comment);
 
-        return new ResponseEntity<String>("Delete successful!", HttpStatus.OK);
+        return new ResponseEntity<Long>(id, HttpStatus.OK);
     }
 
     /**
@@ -187,7 +190,7 @@ public class CommentController {
 
         commentRepository.deleteAllByPost(post);
 
-        return new ResponseEntity<String>("Delete successful!", HttpStatus.OK);
+        return new ResponseEntity<Long>(post, HttpStatus.OK);
     }
 
     /**
@@ -210,6 +213,6 @@ public class CommentController {
 
         commentRepository.deleteAllByStudent(student);
 
-        return new ResponseEntity<String>("Delete successful!", HttpStatus.OK);
+        return new ResponseEntity<Long>(student, HttpStatus.OK);
     }
 }
