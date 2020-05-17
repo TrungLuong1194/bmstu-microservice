@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = { "http://localhost:63342", "http://localhost:63343" })
 @RestController
 public class StudentController {
 
@@ -164,6 +165,6 @@ public class StudentController {
 
         studentRepository.delete(student);
 
-        return new ResponseEntity<String>("Delete successful!", HttpStatus.OK);
+        return new ResponseEntity<Long>(id, HttpStatus.OK);
     }
 }
