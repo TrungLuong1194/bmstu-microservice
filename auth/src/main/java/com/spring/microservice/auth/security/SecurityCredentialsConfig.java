@@ -41,6 +41,11 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // allow all POST requests
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
+                .antMatchers(HttpMethod.DELETE, jwtConfig.getUri()).permitAll()
+                .antMatchers(HttpMethod.PUT, jwtConfig.getUri()).permitAll()
+                .antMatchers(HttpMethod.GET, jwtConfig.getUri()).permitAll()
+                .antMatchers("/auth").permitAll()
+                .antMatchers("/users/**").permitAll()
                 // any other requests must be authenticated
                 .anyRequest().authenticated();
     }

@@ -36,9 +36,17 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 // authorization requests config
                 .authorizeRequests()
                 // allow all who are accessing "auth" service
+                .antMatchers(HttpMethod.GET, jwtConfig.getUri()).permitAll()
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
+                .antMatchers(HttpMethod.PUT, jwtConfig.getUri()).permitAll()
+                .antMatchers(HttpMethod.DELETE, jwtConfig.getUri()).permitAll()
                 // must be an admin if trying to access admin area (authentication is also required here)
-                .antMatchers("/students" + "/admin/**").hasRole("ADMIN")
+//                .antMatchers("/posts" + "/admin/**").hasRole("ADMIN")
+                .antMatchers("/auth").permitAll()
+                .antMatchers("/users/**").permitAll()
+//                .antMatchers("/students/**").hasRole("ADMIN")
+//                .antMatchers("/posts/**").hasRole("ADMIN")
+//                .antMatchers("/comments/**").hasRole("ADMIN")
                 // Any other request must be authenticated
                 .anyRequest().authenticated();
     }
@@ -55,6 +63,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration config = new CorsConfiguration();
         source.registerCorsConfiguration("/**", config.applyPermitDefaultValues());
         config.setExposedHeaders(Arrays.asList("Authorization"));
+        config.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT"));
 
         return source;
     }
