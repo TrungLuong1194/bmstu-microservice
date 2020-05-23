@@ -3,6 +3,8 @@ package com.spring.microservice.student.controller;
 import com.spring.microservice.student.model.Student;
 import com.spring.microservice.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -168,9 +170,14 @@ public class StudentController {
             return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
-//        String urlPost = "http://post-service/posts/students/{student}";
-//
-//        restTemplate.delete(urlPost, id);
+        String urlPost = "http://post-service/posts/students/{student}";
+
+        ResponseEntity<String> response = restTemplate.getForEntity(urlPost, String.class, id);
+        HttpStatus statusCode = response.getStatusCode();
+
+        if (statusCode == HttpStatus.OK) {
+            restTemplate.delete(urlPost, id);
+        }
 
         studentRepository.delete(student);
 
