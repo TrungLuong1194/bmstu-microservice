@@ -1,4 +1,4 @@
-package com.spring.microservice.student.model;
+package com.spring.microservice.auth.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

@@ -2,8 +2,9 @@ package com.spring.microservice.auth.security;
 
 import java.util.List;
 
-import com.spring.microservice.auth.repository.UserRepository;
-import com.spring.microservice.auth.model.User;
+import org.springframework.security.core.userdetails.User;
+import com.spring.microservice.auth.model.Student;
+import com.spring.microservice.auth.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -20,14 +21,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    private UserRepository userRepository;
+    private StudentRepository studentRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        final List<User> users = userRepository.findAll();
+        final List<Student> users = studentRepository.findAll();
 
-        for (User user : users) {
+        for (Student user : users) {
             if (user.getUsername().equals(username)) {
 
                 // Remember that Spring needs roles to be in this format: "ROLE_" + userRole (i.e. "ROLE_ADMIN")
@@ -37,9 +38,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
                 // The "User" class is provided by Spring and represents a model class for user to be returned by UserDetailsService
                 // And used by auth manager to verify and check user authentication.
-                return new org.springframework.security.core.userdetails.User(
-                        user.getUsername(), encoder.encode(user.getPassword()), grantedAuthorities
-                );
+                return new User(user.getUsername(), encoder.encode(user.getPassword()), grantedAuthorities);
             }
         }
 

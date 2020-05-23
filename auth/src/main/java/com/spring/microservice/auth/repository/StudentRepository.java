@@ -1,6 +1,6 @@
-package com.spring.microservice.student.repository;
+package com.spring.microservice.auth.repository;
 
-import com.spring.microservice.student.model.Student;
+import com.spring.microservice.auth.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
