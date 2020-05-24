@@ -65,11 +65,12 @@ class StudentControllerTest {
         Date date2 = new Date();
 
         List<Student> students = Arrays.asList(
-                new Student(1, "Trung", "Luong", date1, "11M",
-                        "Address 1", "012345", "desc1", "email1", major, dorm, city),
+                new Student(1, "trungluong", "12345", "USER", "Trung", "Luong",
+                        date1, "11M", "Address 1", "012345", "desc1", "email1",
+                        major, dorm, city),
 
-                new Student(2, "Trung2", "Luong2", date2, "11M",
-                        "Address 2", "012345678", "desc2", "email2", major, dorm, city)
+                new Student(2, "trungluong2", "123456", "USER", "Trung2", "Luong2",
+                        date2, "11M", "Address 2", "012345678", "desc2", "email2", major, dorm, city)
         );
 
         when(studentRepository.findAll()).thenReturn(students);
@@ -79,6 +80,9 @@ class StudentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].username", is("trungluong")))
+                .andExpect(jsonPath("$[0].password", is("12345")))
+                .andExpect(jsonPath("$[0].role", is("USER")))
                 .andExpect(jsonPath("$[0].firstname", is("Trung")))
                 .andExpect(jsonPath("$[0].lastname", is("Luong")))
                 .andExpect(jsonPath("$[0].classname", is("11M")))
@@ -98,8 +102,9 @@ class StudentControllerTest {
         Dormitory dorm = new Dormitory(1, "Dorm 9");
         Date date1 = new Date();
 
-        Student student = new Student(1, "Trung", "Luong", date1, "11M",
-                "Address 1", "012345", "desc1", "email1", major, dorm, city);
+        Student student = new Student(1, "trungluong", "12345", "USER", "Trung",
+                "Luong", date1, "11M", "Address 1", "012345", "desc1",
+                "email1", major, dorm, city);
 
         when(studentRepository.findStudentById(1)).thenReturn(student);
 
@@ -107,6 +112,9 @@ class StudentControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.username", is("trungluong")))
+                .andExpect(jsonPath("$.password", is("12345")))
+                .andExpect(jsonPath("$.role", is("USER")))
                 .andExpect(jsonPath("$.firstname", is("Trung")))
                 .andExpect(jsonPath("$.lastname", is("Luong")))
                 .andExpect(jsonPath("$.classname", is("11M")))
@@ -126,8 +134,8 @@ class StudentControllerTest {
         Dormitory dorm = new Dormitory(1, "Dorm 9");
         Date date1 = new Date();
 
-        Student student = new Student(1, "Trung", "Luong", date1, "11M",
-                "Address 1", "012345", "desc1", "email1", major, dorm, city);
+        Student student = new Student(1, "trungluong", "12345", "USER","Trung",
+                "Luong", date1, "11M", "Address 1", "012345", "desc1", "email1", major, dorm, city);
 
         when(studentRepository.save(ArgumentMatchers.any(Student.class))).thenReturn(student);
 
@@ -137,6 +145,9 @@ class StudentControllerTest {
 
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.username", is("trungluong")))
+                .andExpect(jsonPath("$.password", is("12345")))
+                .andExpect(jsonPath("$.role", is("USER")))
                 .andExpect(jsonPath("$.firstname", is("Trung")))
                 .andExpect(jsonPath("$.lastname", is("Luong")))
                 .andExpect(jsonPath("$.classname", is("11M")))
@@ -156,8 +167,8 @@ class StudentControllerTest {
         Dormitory dorm = new Dormitory(1, "Dorm 9");
         Date date1 = new Date();
 
-        Student student = new Student(1, "Trung", "Luong", date1, "11M",
-                "Address 1", "012345", "desc1", "email1", major, dorm, city);
+        Student student = new Student(1, "trungluong", "12345", "USER","Trung",
+                "Luong", date1, "11M", "Address 1", "012345", "desc1", "email1", major, dorm, city);
 
         when(studentRepository.findStudentById(1)).thenReturn(student);
         when(studentRepository.save(ArgumentMatchers.any(Student.class))).thenReturn(student);
@@ -168,6 +179,9 @@ class StudentControllerTest {
 
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.username", is("trungluong")))
+                .andExpect(jsonPath("$.password", is("12345")))
+                .andExpect(jsonPath("$.role", is("USER")))
                 .andExpect(jsonPath("$.firstname", is("Trung")))
                 .andExpect(jsonPath("$.lastname", is("Luong")))
                 .andExpect(jsonPath("$.classname", is("11M")))
@@ -178,22 +192,4 @@ class StudentControllerTest {
 
         verify(studentRepository, times(1)).save(ArgumentMatchers.any(Student.class));
     }
-
-//    @Test
-//    void deleteStudent() throws Exception {
-//
-//        City city = new City(1, "Hanoi");
-//        Major major = new Major(1, "IU6");
-//        Dormitory dorm = new Dormitory(1, "Dorm 9");
-//        Date date1 = new Date();
-//
-//        Student student = new Student(1, "Trung", "Luong", date1, "11M",
-//                "Address 1", "012345", "desc1", "email1", major, dorm, city);
-//
-//        when(studentRepository.findStudentById(1)).thenReturn(student);
-//        doNothing().when(studentRepository).delete(student);
-//
-//        mockMvc.perform(delete("/students/1"))
-//                .andExpect(status().isOk());
-//    }
 }

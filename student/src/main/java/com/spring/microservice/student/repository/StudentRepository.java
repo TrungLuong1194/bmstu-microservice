@@ -12,4 +12,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Student findStudentByEmail(String email);
 
     Student findStudentByPhone(String phone);
+
+    Student findStudentByUsername(String username);
 }

@@ -3,6 +3,8 @@ package com.spring.microservice.student.controller;
 import com.spring.microservice.student.model.Student;
 import com.spring.microservice.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -100,6 +102,7 @@ public class StudentController {
 
         Student studentWithEmail = studentRepository.findStudentByEmail(studentDetails.getEmail());
         Student studentWithPhone = studentRepository.findStudentByPhone(studentDetails.getPhone());
+        Student studentWithUsername = studentRepository.findStudentByUsername(studentDetails.getUsername());
 
         if (studentWithEmail != null) {
             return new ResponseEntity<String>("Haved student with email " + studentDetails.getEmail(),
@@ -108,6 +111,11 @@ public class StudentController {
 
         if (studentWithPhone != null) {
             return new ResponseEntity<String>("Haved student with phone " + studentDetails.getPhone(),
+                    HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        if (studentWithUsername != null) {
+            return new ResponseEntity<String>("Haved student with username " + studentDetails.getUsername(),
                     HttpStatus.NOT_ACCEPTABLE);
         }
 
@@ -128,6 +136,9 @@ public class StudentController {
             return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
+        student.setUsername(studentDetails.getUsername());
+        student.setPassword(studentDetails.getPassword());
+        student.setRole(studentDetails.getRole());
         student.setFirstname(studentDetails.getFirstname());
         student.setLastname(studentDetails.getLastname());
         student.setBirthday(studentDetails.getBirthday());
@@ -161,7 +172,12 @@ public class StudentController {
 
         String urlPost = "http://post-service/posts/students/{student}";
 
-        restTemplate.delete(urlPost, id);
+        ResponseEntity<String> response = restTemplate.getForEntity(urlPost, String.class, id);
+        HttpStatus statusCode = response.getStatusCode();
+
+        if (statusCode == HttpStatus.OK) {
+            restTemplate.delete(urlPost, id);
+        }
 
         studentRepository.delete(student);
 

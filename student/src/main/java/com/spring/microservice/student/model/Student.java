@@ -12,6 +12,9 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String username;
+    private String password;
+    private String role;
     private String firstname;
     private String lastname;
 
@@ -39,8 +42,12 @@ public class Student {
     public Student() {
     }
 
-    public Student(String firstname, String lastname, Date birthday, String classname, String address,
-                   String phone, String description, String email, Major major, Dormitory dorm, City city) {
+    public Student(String username, String password, String role, String firstname, String lastname, Date birthday,
+                   String classname, String address, String phone, String description, String email, Major major,
+                   Dormitory dorm, City city) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthday = birthday;
@@ -54,9 +61,13 @@ public class Student {
         this.city = city;
     }
 
-    public Student(long id, String firstname, String lastname, Date birthday, String classname, String address,
-                   String phone, String description, String email, Major major, Dormitory dorm, City city) {
+    public Student(long id, String username, String password, String role, String firstname, String lastname,
+                   Date birthday, String classname, String address, String phone, String description, String email,
+                   Major major, Dormitory dorm, City city) {
         this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthday = birthday;
@@ -74,20 +85,32 @@ public class Student {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-//    public UUID getUid() {
-//        return uid;
-//    }
-//
-//    public void setUid(UUID uid) {
-//        this.uid = uid;
-//    }
+    public String getUsername() {
+        return username;
+    }
 
-    public String getFullname() {
-        return this.firstname + " " + this.lastname;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getFirstname() {
@@ -182,6 +205,9 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", birthday=" + birthday +
