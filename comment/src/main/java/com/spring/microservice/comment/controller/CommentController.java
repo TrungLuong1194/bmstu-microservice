@@ -59,7 +59,7 @@ public class CommentController {
     @GetMapping("/comments/students/{student}")
     public ResponseEntity<?> getCommentByStudent(@PathVariable Long student) {
 
-        String url = "http://student-service/students/{id}";
+        String url = "https://student-bmstu.herokuapp.com/students/{id}";
 
         try {
             restTemplate.getForObject(url, String.class, student);
@@ -81,7 +81,7 @@ public class CommentController {
     @GetMapping("/comments/posts/{post}")
     public ResponseEntity<?> getCommentByPost(@PathVariable Long post) {
 
-        String url = "http://post-service/posts/{id}";
+        String url = "https://post-bmstu.herokuapp.com/posts/{id}";
 
         try {
             restTemplate.getForObject(url, String.class, post);
@@ -103,7 +103,7 @@ public class CommentController {
     @PostMapping("/comments")
     public ResponseEntity<?> createComment(@Valid @RequestBody Comment commentDetails) {
 
-        String urlStudent = "http://student-service/students/{id}";
+        String urlStudent = "https://student-bmstu.herokuapp.com/students/{id}";
 
         try {
             restTemplate.getForObject(urlStudent, String.class, commentDetails.getStudent());
@@ -112,7 +112,7 @@ public class CommentController {
                     HttpStatus.NOT_ACCEPTABLE);
         }
 
-        String urlPost = "http://post-service/posts/{id}";
+        String urlPost = "https://post-bmstu.herokuapp.com/posts/{id}";
 
         try {
             restTemplate.getForObject(urlPost, String.class, commentDetails.getPost());
@@ -179,7 +179,7 @@ public class CommentController {
     @DeleteMapping("/comments/posts/{post}")
     public ResponseEntity<?> deleteCommentByPost(@PathVariable Long post) {
 
-        String url = "http://post-service/posts/{id}";
+        String url = "https://post-bmstu.herokuapp.com/posts/{id}";
 
         try {
             restTemplate.getForObject(url, String.class, post);
@@ -202,7 +202,7 @@ public class CommentController {
     @DeleteMapping("/comments/students/{student}")
     public ResponseEntity<?> deleteCommentByStudent(@PathVariable Long student) {
 
-        String url = "http://student-service/students/{id}";
+        String url = "https://student-bmstu.herokuapp.com/students/{id}";
 
         try {
             restTemplate.getForObject(url, String.class, student);

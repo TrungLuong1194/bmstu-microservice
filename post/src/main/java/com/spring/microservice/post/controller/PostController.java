@@ -65,7 +65,7 @@ public class PostController {
             return new ResponseEntity<String>("No post found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
-        String urlComment = "http://comment-service/comments/posts/{post}";
+        String urlComment = "https://comment-bmstu.herokuapp.com/comments/posts/{post}";
 
         String str = restTemplate.getForObject(urlComment, String.class, id);
 
@@ -80,7 +80,7 @@ public class PostController {
     @GetMapping("/posts/students/{student}")
     public ResponseEntity<?> getPostByStudent(@PathVariable Long student) {
 
-        String url = "http://student-service/students/{id}";
+        String url = "https://student-bmstu.herokuapp.com/students/{id}";
 
         try {
             restTemplate.getForObject(url, String.class, student);
@@ -102,7 +102,7 @@ public class PostController {
     @PostMapping("/posts")
     public ResponseEntity<?> createPost(@Valid @RequestBody Post postDetails) {
 
-        String url = "http://student-service/students/{id}";
+        String url = "https://student-bmstu.herokuapp.com/students/{id}";
 
         try {
             restTemplate.getForObject(url, String.class, postDetails.getStudent());
@@ -168,7 +168,7 @@ public class PostController {
             return new ResponseEntity<String>("No post found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
-        String url = "http://comment-service/comments/posts/{post}";
+        String url = "https://comment-bmstu.herokuapp.com/comments/posts/{post}";
 
         restTemplate.delete(url, id);
 
@@ -186,7 +186,7 @@ public class PostController {
     @DeleteMapping("/posts/students/{student}")
     public ResponseEntity<?> deletePostByStudent(@PathVariable Long student) {
 
-        String url = "http://student-service/students/{id}";
+        String url = "https://student-bmstu.herokuapp.com/students/{id}";
 
         try {
             restTemplate.getForObject(url, String.class, student);
@@ -195,7 +195,7 @@ public class PostController {
                     HttpStatus.NOT_ACCEPTABLE);
         }
 
-        String urlComment = "http://comment-service/comments/students/{student}";
+        String urlComment = "https://comment-bmstu.herokuapp.com/comments/students/{student}";
 
         restTemplate.delete(urlComment, student);
 

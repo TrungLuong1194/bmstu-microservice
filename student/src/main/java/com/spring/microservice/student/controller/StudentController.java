@@ -3,8 +3,6 @@ package com.spring.microservice.student.controller;
 import com.spring.microservice.student.model.Student;
 import com.spring.microservice.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,7 +62,7 @@ public class StudentController {
             return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
-        String urlComment = "http://comment-service/comments/students/{student}";
+        String urlComment = "https://comment-bmstu.herokuapp.com/comments/students/{student}";
 
         String str = restTemplate.getForObject(urlComment, String.class, id);
 
@@ -85,7 +83,7 @@ public class StudentController {
             return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
-        String urlPost = "http://post-service/posts/students/{student}";
+        String urlPost = "https://post-bmstu.herokuapp.com/posts/students/{student}";
 
         String str = restTemplate.getForObject(urlPost, String.class, id);
 
@@ -170,7 +168,7 @@ public class StudentController {
             return new ResponseEntity<String>("No student found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
-        String urlPost = "http://post-service/posts/students/{student}";
+        String urlPost = "https://post-bmstu.herokuapp.com/posts/students/{student}";
 
         ResponseEntity<String> response = restTemplate.getForEntity(urlPost, String.class, id);
         HttpStatus statusCode = response.getStatusCode();
